@@ -22,16 +22,22 @@
           <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Archivos
           </a>
+          
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="lista_producto.php">Productos</a></li>
-            <li><a class="dropdown-item" href="lista_cliente.php">Clientes</a></li>
-            <li><a class="dropdown-item" href="lista_proveedor.php">Proveedor</a></li>
+          <?php
+            function Ruta(){
+              $rutaActual = dirname($_SERVER['REQUEST_URI']);
+            }
+          ?>
+            <li><a class="dropdown-item" href="/Tareas/sisventas/Modules/Productos/lista_producto.php">Productos</a></li>
+            <li><a class="dropdown-item" href="/Tareas/sisventas/Modules/clientes/lista_cliente.php">Clientes</a></li>
+            <li><a class="dropdown-item" href="/Tareas/sisventas/Modules/Proveedor/lista_proveedor.php">Proveedor</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="lista_docu.php">Documentos</a></li>
-            <li><a class="dropdown-item" href="lista_linea.php">Lineas</a></li>
-            <li><a class="dropdown-item" href="lista_usuario.php">Usuarios</a></li>
+            <li><a class="dropdown-item" href="/Tareas/sisventas/Modules/Documentos/lista_docu.php">Documentos</a></li>
+            <li><a class="dropdown-item" href="/Tareas/sisventas/Modules/Lineas/lista_linea.php">Lineas</a></li>
+            <li><a class="dropdown-item" href="/Tareas/sisventas/Modules/Usuarios/lista_usuario.php">Usuarios</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="logout.php">Salir</a></li>
+            <li><a class="dropdown-item" href="/Tareas/sisventas/logout.php">Salir</a></li>
           </ul>
         </li>
         <li class="nav-item">

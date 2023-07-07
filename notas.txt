@@ -1,0 +1,1 @@
+si ya vas a desplegar el proyecto deberas cambiar las rutas del header eliminando esto : /Tareas/sisventas

@@ -1,8 +1,8 @@
-<?php include_once('header.php') ?>
+<?php include_once(__DIR__.'/../../header.php') ?>
 <?php
 $codigo = $_GET["codigo"];
-include_once('includes/acceso.php');
-include_once('clases/producto.php');
+include_once(__DIR__.'/../../includes/acceso.php');
+include_once(__DIR__.'/../../clases/producto.php');
 $conexion = connect_db();
 $oproducto = new Producto();
 $oproducto->conectar_db($conexion);

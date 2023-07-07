@@ -8,6 +8,6 @@
 </div>
 </div>
 <?php include('footer.php'); 
-    include('prueba/probando_2/prueba.php');
+    
 ?>
 

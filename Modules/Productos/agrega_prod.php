@@ -1,4 +1,4 @@
-<?php include_once('header.php') ?>
+<?php include_once(__DIR__.'/../../header.php') ?>
 <div class="container p-12">
 <div class="row">
 <div class="col-md-4">
@@ -29,4 +29,4 @@
             </div>
             </div>
             </div>  
-<?php include_once('footer.php') ?>
+<?php include_once(__DIR__.'/../../footer.php') ?>
