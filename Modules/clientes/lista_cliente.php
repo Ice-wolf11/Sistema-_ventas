@@ -12,7 +12,7 @@ if ($datos_cli){
         <div class="row">
         <div class="container p-4">
             <h4>Listado de Clientes...</h4>
-        <a href="agrega_cli.php" class="btn btn-info add-new">Nuevo</a>
+        <a href="agrega_clie.php" class="btn btn-info add-new">Nuevo</a>
         </div>  
         <div class="card card-body">
 
@@ -42,8 +42,8 @@ if ($datos_cli){
                     <td><?php echo $row['telcliente']; ?></td>
                     
                     <td>
-                    <a href="modifica_cli.php?codigo=<?php echo $id; ?>" class="btn btn-info add-new">Modificar</a>   
-                    <a href="elimina_cli.php?codigo=<?php echo $id; ?>" class="btn btn-info add-new">Eliminar</a>    
+                    <a href="modifica_clie.php?codigo=<?php echo $id; ?>" class="btn btn-info add-new">Modificar</a>   
+                    <a href="elimina_clie.php?codigo=<?php echo $id; ?>" class="btn btn-info add-new">Eliminar</a>    
                     </td>
                 </tr>
              <?php

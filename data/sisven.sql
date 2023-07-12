@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-06-2023 a las 18:52:12
--- Versión del servidor: 10.4.27-MariaDB
--- Versión de PHP: 8.2.0
+-- Tiempo de generación: 12-07-2023 a las 07:34:26
+-- Versión del servidor: 10.4.28-MariaDB
+-- Versión de PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `sistema_ventas`
+-- Base de datos: `sisven`
 --
 
 -- --------------------------------------------------------
@@ -34,6 +34,14 @@ CREATE TABLE `clientes` (
   `dircliente` varchar(64) NOT NULL,
   `telcliente` varchar(9) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `clientes`
+--
+
+INSERT INTO `clientes` (`idCliente`, `nombre`, `ruc`, `dircliente`, `telcliente`) VALUES
+(1, 'El Señor De La Noche', '123546', 'calle falsa 123', '98756411'),
+(2, 'Andrew', '123456', 'callefalsa 123', '1346789');
 
 -- --------------------------------------------------------
 
@@ -123,6 +131,13 @@ CREATE TABLE `productos` (
   `idLinea` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
+--
+-- Volcado de datos para la tabla `productos`
+--
+
+INSERT INTO `productos` (`idProducto`, `nomproducto`, `unimed`, `stock`, `preuni`, `cosuni`, `idLinea`) VALUES
+(1, 'RTX 4090TI', '5', 15, 5000.0000, 4500.0000, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -170,13 +185,17 @@ ALTER TABLE `compras`
 -- Indices de la tabla `detallecompras`
 --
 ALTER TABLE `detallecompras`
-  ADD PRIMARY KEY (`idDetalleCompra`);
+  ADD PRIMARY KEY (`idDetalleCompra`),
+  ADD KEY `fk_detalleCproductos` (`idProducto`),
+  ADD KEY `fk_detallecompras_compra` (`idCompra`);
 
 --
 -- Indices de la tabla `detalleventas`
 --
 ALTER TABLE `detalleventas`
-  ADD PRIMARY KEY (`idDetalleVenta`);
+  ADD PRIMARY KEY (`idDetalleVenta`),
+  ADD KEY `fk_detalleVentas` (`idVenta`),
+  ADD KEY `fk_detalleProducto` (`idProducto`);
 
 --
 -- Indices de la tabla `documentos`
@@ -200,7 +219,8 @@ ALTER TABLE `lineas`
 -- Indices de la tabla `productos`
 --
 ALTER TABLE `productos`
-  ADD PRIMARY KEY (`idProducto`);
+  ADD PRIMARY KEY (`idProducto`),
+  ADD KEY `fk_productoLinea` (`idLinea`);
 
 --
 -- Indices de la tabla `proveedores`
@@ -213,7 +233,74 @@ ALTER TABLE `proveedores`
 -- Indices de la tabla `ventas`
 --
 ALTER TABLE `ventas`
-  ADD PRIMARY KEY (`idVenta`);
+  ADD PRIMARY KEY (`idVenta`),
+  ADD KEY `fk_ventas` (`idCliente`),
+  ADD KEY `fk_ventaEmpleado` (`idEmpleado`),
+  ADD KEY `fk_ventaDocumentos` (`idDocumento`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `clientes`
+--
+ALTER TABLE `clientes`
+  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `compras`
+--
+ALTER TABLE `compras`
+  MODIFY `idCompra` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `detallecompras`
+--
+ALTER TABLE `detallecompras`
+  MODIFY `idDetalleCompra` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `detalleventas`
+--
+ALTER TABLE `detalleventas`
+  MODIFY `idDetalleVenta` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `documentos`
+--
+ALTER TABLE `documentos`
+  MODIFY `idDocumento` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `empleados`
+--
+ALTER TABLE `empleados`
+  MODIFY `idEmpleado` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `lineas`
+--
+ALTER TABLE `lineas`
+  MODIFY `idLinea` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `productos`
+--
+ALTER TABLE `productos`
+  MODIFY `idProducto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `proveedores`
+--
+ALTER TABLE `proveedores`
+  MODIFY `idProveedor` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `ventas`
+--
+ALTER TABLE `ventas`
+  MODIFY `idVenta` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Restricciones para tablas volcadas
@@ -223,13 +310,48 @@ ALTER TABLE `ventas`
 -- Filtros para la tabla `compras`
 --
 ALTER TABLE `compras`
-  ADD CONSTRAINT `compras_ibfk_1` FOREIGN KEY (`idProveedor`) REFERENCES `proveedores` (`idProveedor`);
+  ADD CONSTRAINT `fk_compras_proveedor` FOREIGN KEY (`idProveedor`) REFERENCES `proveedores` (`idProveedor`);
+
+--
+-- Filtros para la tabla `detallecompras`
+--
+ALTER TABLE `detallecompras`
+  ADD CONSTRAINT `fk_detallecompras_compra` FOREIGN KEY (`idCompra`) REFERENCES `compras` (`idCompra`),
+  ADD CONSTRAINT `fk_detallecompras_productos` FOREIGN KEY (`idProducto`) REFERENCES `productos` (`idProducto`);
+
+--
+-- Filtros para la tabla `detalleventas`
+--
+ALTER TABLE `detalleventas`
+  ADD CONSTRAINT `fk_detalleProducto` FOREIGN KEY (`idProducto`) REFERENCES `productos` (`idProducto`),
+  ADD CONSTRAINT `fk_detalleVventa` FOREIGN KEY (`idVenta`) REFERENCES `ventas` (`idVenta`),
+  ADD CONSTRAINT `fk_detalleventas_producto` FOREIGN KEY (`idProducto`) REFERENCES `productos` (`idProducto`),
+  ADD CONSTRAINT `fk_detalleventas_venta` FOREIGN KEY (`idVenta`) REFERENCES `ventas` (`idVenta`);
+
+--
+-- Filtros para la tabla `productos`
+--
+ALTER TABLE `productos`
+  ADD CONSTRAINT `fk_productosLinea` FOREIGN KEY (`idLinea`) REFERENCES `lineas` (`idLinea`),
+  ADD CONSTRAINT `fk_productos_linea` FOREIGN KEY (`idLinea`) REFERENCES `lineas` (`idLinea`);
 
 --
 -- Filtros para la tabla `proveedores`
 --
 ALTER TABLE `proveedores`
-  ADD CONSTRAINT `proveedores_ibfk_1` FOREIGN KEY (`idLinea`) REFERENCES `lineas` (`idLinea`);
+  ADD CONSTRAINT `fk_proveedorLinea` FOREIGN KEY (`idLinea`) REFERENCES `lineas` (`idLinea`),
+  ADD CONSTRAINT `fk_proveedores_linea` FOREIGN KEY (`idLinea`) REFERENCES `lineas` (`idLinea`);
+
+--
+-- Filtros para la tabla `ventas`
+--
+ALTER TABLE `ventas`
+  ADD CONSTRAINT `fk_VentaCliente` FOREIGN KEY (`idCliente`) REFERENCES `clientes` (`idCliente`),
+  ADD CONSTRAINT `fk_VentaDocumento` FOREIGN KEY (`idDocumento`) REFERENCES `documentos` (`idDocumento`),
+  ADD CONSTRAINT `fk_VentaEmpleado` FOREIGN KEY (`idEmpleado`) REFERENCES `empleados` (`idEmpleado`),
+  ADD CONSTRAINT `fk_ventas_cliente` FOREIGN KEY (`idCliente`) REFERENCES `clientes` (`idCliente`),
+  ADD CONSTRAINT `fk_ventas_documento` FOREIGN KEY (`idDocumento`) REFERENCES `documentos` (`idDocumento`),
+  ADD CONSTRAINT `fk_ventas_empleado` FOREIGN KEY (`idEmpleado`) REFERENCES `empleados` (`idEmpleado`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

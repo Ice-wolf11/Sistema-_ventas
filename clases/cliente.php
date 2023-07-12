@@ -43,12 +43,13 @@ class  Cliente {
 
 		}	
 		public function modifica_cliente($id,$nom,$ruc,$dir,$tel){
-			$sql = "update clientes set
-			nombre='$nom',
-			ruc='$ruc',
-			dircliente=$dir, 
-			telcliente=$tel 
-			where idCliente='$id'";
+			$sql = "UPDATE clientes SET
+					nombre='$nom',
+					ruc='$ruc',
+					dircliente='$dir', 
+					telcliente='$tel' 
+					WHERE idCliente='$id'";
+
 			
 			$res = mysqli_query($this->con, $sql);
 			if($res){
