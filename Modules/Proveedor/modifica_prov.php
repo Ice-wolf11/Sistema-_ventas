@@ -23,6 +23,24 @@ $datos=$proveedor->consulta($codigo);
             <div class="col-md-4">
             <input type="text" name="nom" class="form-control" value="<?php echo $datos['nombre'];?>" >
             <div class="col-md-4">
+            </div>
+            <div class="col-md-4">RUC:</div>
+            <div class="col-md-4">
+            <input type="text" name="ruc" class="form-control" value="<?php echo $datos['RUC'];?>" >
+            </div>
+            <div class="col-md-4">Direccion:</div>
+            <div class="col-md-4">
+            <input type="text" name="dir" class="form-control" value="<?php echo $datos['Direccion'];?>" >
+            </div>
+            <div class="col-md-4">Telefono:</div>
+            <div class="col-md-4">
+            <input type="text" name="tel" class="form-control" value="<?php echo $datos['Telefono'];?>" >
+            </div>
+            <div class="col-md-4">Correo:</div>
+            <div class="col-md-4">
+            <input type="text" name="email" class="form-control" value="<?php echo $datos['Correo'];?>" >
+            </div>
+            <div class="col-md-4">
             <input type="submit" class="btn btn-success btn-block" name="envia_datos" value="Enviar">
             </div>
         </form>

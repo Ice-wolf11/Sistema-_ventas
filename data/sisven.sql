@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-07-2023 a las 07:34:26
+-- Tiempo de generación: 24-07-2023 a las 05:46:11
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -78,7 +78,8 @@ CREATE TABLE `detalleventas` (
   `idDetalleVenta` int(11) NOT NULL,
   `idVenta` int(11) DEFAULT NULL,
   `idProducto` int(11) DEFAULT NULL,
-  `cantidad` int(11) NOT NULL
+  `cantidad` int(11) NOT NULL,
+  `precioTotal` decimal(10,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 -- --------------------------------------------------------
@@ -101,19 +102,17 @@ CREATE TABLE `documentos` (
 CREATE TABLE `empleados` (
   `idEmpleado` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL,
-  `telefono` varchar(9) DEFAULT NULL
+  `telefono` varchar(9) DEFAULT NULL,
+  `Usuario` varchar(25) DEFAULT NULL,
+  `Contraseña` varchar(16) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
--- --------------------------------------------------------
-
 --
--- Estructura de tabla para la tabla `lineas`
+-- Volcado de datos para la tabla `empleados`
 --
 
-CREATE TABLE `lineas` (
-  `idLinea` int(11) NOT NULL,
-  `nombre` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+INSERT INTO `empleados` (`idEmpleado`, `nombre`, `telefono`, `Usuario`, `Contraseña`) VALUES
+(4, 'Andrew', '98784565', 'ElSeñorDeLaNoche', 'contraseña123');
 
 -- --------------------------------------------------------
 
@@ -128,15 +127,8 @@ CREATE TABLE `productos` (
   `stock` int(11) NOT NULL,
   `preuni` decimal(10,4) NOT NULL,
   `cosuni` decimal(10,4) NOT NULL,
-  `idLinea` int(11) DEFAULT NULL
+  `idProveedor` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
-
---
--- Volcado de datos para la tabla `productos`
---
-
-INSERT INTO `productos` (`idProducto`, `nomproducto`, `unimed`, `stock`, `preuni`, `cosuni`, `idLinea`) VALUES
-(1, 'RTX 4090TI', '5', 15, 5000.0000, 4500.0000, NULL);
 
 -- --------------------------------------------------------
 
@@ -147,7 +139,10 @@ INSERT INTO `productos` (`idProducto`, `nomproducto`, `unimed`, `stock`, `preuni
 CREATE TABLE `proveedores` (
   `idProveedor` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL,
-  `idLinea` int(11) DEFAULT NULL
+  `RUC` varchar(10) DEFAULT NULL,
+  `Direccion` varchar(50) DEFAULT NULL,
+  `Telefono` varchar(9) DEFAULT NULL,
+  `Correo` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 -- --------------------------------------------------------
@@ -210,24 +205,17 @@ ALTER TABLE `empleados`
   ADD PRIMARY KEY (`idEmpleado`);
 
 --
--- Indices de la tabla `lineas`
---
-ALTER TABLE `lineas`
-  ADD PRIMARY KEY (`idLinea`);
-
---
 -- Indices de la tabla `productos`
 --
 ALTER TABLE `productos`
   ADD PRIMARY KEY (`idProducto`),
-  ADD KEY `fk_productoLinea` (`idLinea`);
+  ADD KEY `fk_productoProveedor` (`idProveedor`);
 
 --
 -- Indices de la tabla `proveedores`
 --
 ALTER TABLE `proveedores`
-  ADD PRIMARY KEY (`idProveedor`),
-  ADD KEY `idLinea` (`idLinea`);
+  ADD PRIMARY KEY (`idProveedor`);
 
 --
 -- Indices de la tabla `ventas`
@@ -246,7 +234,7 @@ ALTER TABLE `ventas`
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `compras`
@@ -276,25 +264,19 @@ ALTER TABLE `documentos`
 -- AUTO_INCREMENT de la tabla `empleados`
 --
 ALTER TABLE `empleados`
-  MODIFY `idEmpleado` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `lineas`
---
-ALTER TABLE `lineas`
-  MODIFY `idLinea` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idEmpleado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `idProducto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idProducto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `proveedores`
 --
 ALTER TABLE `proveedores`
-  MODIFY `idProveedor` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idProveedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `ventas`
@@ -332,15 +314,7 @@ ALTER TABLE `detalleventas`
 -- Filtros para la tabla `productos`
 --
 ALTER TABLE `productos`
-  ADD CONSTRAINT `fk_productosLinea` FOREIGN KEY (`idLinea`) REFERENCES `lineas` (`idLinea`),
-  ADD CONSTRAINT `fk_productos_linea` FOREIGN KEY (`idLinea`) REFERENCES `lineas` (`idLinea`);
-
---
--- Filtros para la tabla `proveedores`
---
-ALTER TABLE `proveedores`
-  ADD CONSTRAINT `fk_proveedorLinea` FOREIGN KEY (`idLinea`) REFERENCES `lineas` (`idLinea`),
-  ADD CONSTRAINT `fk_proveedores_linea` FOREIGN KEY (`idLinea`) REFERENCES `lineas` (`idLinea`);
+  ADD CONSTRAINT `fk_productoProveedor` FOREIGN KEY (`idProveedor`) REFERENCES `proveedores` (`idProveedor`);
 
 --
 -- Filtros para la tabla `ventas`

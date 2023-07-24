@@ -11,7 +11,7 @@
   <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="index.php">Empresa SA</a>
+    <a class="navbar-brand" href="/Tareas/sisventas/index.php">Empresa SA</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -34,7 +34,6 @@
             <li><a class="dropdown-item" href="/Tareas/sisventas/Modules/Proveedor/lista_proveedor.php">Proveedor</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="/Tareas/sisventas/Modules/Documentos/lista_docu.php">Documentos</a></li>
-            <li><a class="dropdown-item" href="/Tareas/sisventas/Modules/Lineas/lista_linea.php">Lineas</a></li>
             <li><a class="dropdown-item" href="/Tareas/sisventas/Modules/Usuarios/lista_usuario.php">Usuarios</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="/Tareas/sisventas/logout.php">Salir</a></li>

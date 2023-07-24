@@ -1,12 +1,11 @@
 <?php
-    class Proveedor{
-        private $idProveedor;
+    class Usuario{
+        private $idEmpleado;
         private $nombre;
-		private $ruc;
-		private $direccion;
 		private $telefono;
-		private $correo;
-        private $con;
+		private $user;
+		private $password;
+		
         
 
         public function conectar_db($cn){
@@ -18,21 +17,21 @@
 			return $valor;
 		}
 
-        public function listaProveedor(){
-			$sql = "SELECT * FROM proveedores";
+        public function lista_usuario(){
+			$sql = "SELECT * FROM empleados";
 			$res = mysqli_query($this->con, $sql);
 			return $res;
 		}
 
         public function consulta($id){
-			$sql = "SELECT * FROM proveedores where idProveedor=$id";
+			$sql = "SELECT * FROM empleados where idEmpleado=$id";
 			$res = mysqli_query($this->con, $sql);
 			$return = mysqli_fetch_array($res );
 			return $return ;
 		}
 
-        public function agrega_proveedor($nom,$ruc,$dir,$tel,$correo){
-			$sql = "insert into proveedores(nombre,RUC,Direccion,Telefono,Correo) values ('$nom','$ruc','$dir','$tel','$correo')";
+        public function agrega_usuario($nom,$tel,$user,$pass){
+			$sql = "insert into empleados(nombre,telefono,Usuario,Contraseña) values ('$nom','$tel','$user','$pass')";
 			
 			$res = mysqli_query($this->con, $sql);
 			if($res){
@@ -43,14 +42,13 @@
 
 		}	
 
-        public function modifica_proveedor($id,$nom,$ruc,$dir,$tel,$correo){
-			$sql = "UPDATE proveedores SET
+        public function modifica_usuario($id,$nom,$tel,$user,$pass){
+			$sql = "UPDATE empleados SET
         				nombre = '$nom',
-						RUC = '$ruc',
-						Direccion = '$dir',
-						Telefono = '$tel',
-						Correo = '$correo' 
-        				WHERE idProveedor = '$id'";
+						telefono = '$tel',
+						Usuario = '$user',
+						Contraseña = '$pass'
+        				WHERE idEmpleado = '$id'";
 						
 			$res = mysqli_query($this->con, $sql);
 			if($res){
@@ -62,7 +60,7 @@
 		}	
 
         public function borrar($id){
-			$sql = "DELETE FROM proveedores WHERE idProveedor=$id";
+			$sql = "DELETE FROM empleados WHERE idEmpleado=$id";
 			$res = mysqli_query($this->con, $sql);
 			if($res){
 				return true;

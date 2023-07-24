@@ -21,8 +21,10 @@ if ($datos_prov){
                 <tr>
                     <th>Id</th>
                     <th>Nombre del Proveedor</th>
-                    
-                    
+                    <th>RUC</th>
+                    <th>Direccion</th>
+                    <th>Telefono</th>
+                    <th>Correo</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -35,8 +37,10 @@ if ($datos_prov){
                 <tr>
                     <td><?php echo $id; ?></td>
                     <td><?php echo $row['nombre']; ?></td>
-                   
-                    
+                    <td><?php echo $row['RUC']; ?></td>
+                    <td><?php echo $row['Direccion']; ?></td>
+                    <td><?php echo $row['Telefono']; ?></td>
+                    <td><?php echo $row['Correo']; ?></td>
                     <td>
                     <a href="modifica_prov.php?codigo=<?php echo $id; ?>" class="btn btn-info add-new">Modificar</a>   
                     <a href="elimina_prov.php?codigo=<?php echo $id; ?>" class="btn btn-info add-new">Eliminar</a>    
