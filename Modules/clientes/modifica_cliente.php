@@ -1,4 +1,9 @@
 <?php
+session_start();
+if (!isset($_SESSION['login_estado']) and $_SESSION['login_estado'] != 1){
+    header("location: /Tareas/sisventas/login.php");
+    exit;
+}
 include(__DIR__.'/../../header.php'); 
 
 if (isset($_POST['envia_datos'])){

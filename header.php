@@ -24,11 +24,7 @@
           </a>
           
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <?php
-            function Ruta(){
-              $rutaActual = dirname($_SERVER['REQUEST_URI']);
-            }
-          ?>
+         
             <li><a class="dropdown-item" href="/Tareas/sisventas/Modules/Productos/lista_producto.php">Productos</a></li>
             <li><a class="dropdown-item" href="/Tareas/sisventas/Modules/clientes/lista_cliente.php">Clientes</a></li>
             <li><a class="dropdown-item" href="/Tareas/sisventas/Modules/Proveedor/lista_proveedor.php">Proveedor</a></li>
@@ -39,8 +35,13 @@
             <li><a class="dropdown-item" href="/Tareas/sisventas/logout.php">Salir</a></li>
           </ul>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Procesos</a>
+        <li class="nav-item dropdown">
+          <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Procesos
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="/Tareas/sisventas/Modules/Ventas/registro_ventas.php">Registro Ventas</a></li>
+            </ul>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Consultas</a>

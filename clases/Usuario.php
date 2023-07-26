@@ -5,7 +5,7 @@
 		private $telefono;
 		private $user;
 		private $password;
-		
+		private $con;
         
 
         public function conectar_db($cn){
@@ -31,7 +31,10 @@
 		}
 
         public function agrega_usuario($nom,$tel,$user,$pass){
-			$sql = "insert into empleados(nombre,telefono,Usuario,Contraseña) values ('$nom','$tel','$user','$pass')";
+			
+			$usu_pass_hash = password_hash($pass, PASSWORD_DEFAULT);
+			
+			$sql = "insert into empleados(nombre,telefono,Usuario,Contraseña) values ('$nom','$tel','$user','$usu_pass_hash')";
 			
 			$res = mysqli_query($this->con, $sql);
 			if($res){
@@ -43,11 +46,14 @@
 		}	
 
         public function modifica_usuario($id,$nom,$tel,$user,$pass){
+			
+			$usu_pass_hash = password_hash($pass, PASSWORD_DEFAULT);
+
 			$sql = "UPDATE empleados SET
         				nombre = '$nom',
 						telefono = '$tel',
 						Usuario = '$user',
-						Contraseña = '$pass'
+						Contraseña = '$usu_pass_hash'
         				WHERE idEmpleado = '$id'";
 						
 			$res = mysqli_query($this->con, $sql);
@@ -67,6 +73,13 @@
 			}else{
 				return false;
 			}
+		}
+
+		public function lee_datos($usu){
+			$sql = "SELECT * FROM empleados where Usuario='$usu'";
+			$res = mysqli_query($this->con, $sql);
+			$return = mysqli_fetch_array($res );
+			return $return ;
 		}
 
 

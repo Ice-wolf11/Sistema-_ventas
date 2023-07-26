@@ -1,4 +1,11 @@
-<?php include_once(__DIR__.'/../../header.php') ?>
+<?php 
+session_start();
+if (!isset($_SESSION['login_estado']) and $_SESSION['login_estado'] != 1){
+    header("location: /Tareas/sisventas/login.php");
+    exit;
+}
+
+include_once(__DIR__.'/../../header.php') ?>
 <div class="container p-12">
 <div class="row">
 <div class="col-md-4">
