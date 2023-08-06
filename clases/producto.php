@@ -9,6 +9,7 @@ class Producto {
 		private $preuni;
 		private $cosuni;
 		private $con;
+		private $prov;
 
 		public function conectar_db($cn){
 			$this->con = $cn;
@@ -33,8 +34,8 @@ class Producto {
 			return $return ;
 		}
 		
-		public function agrega_producto($nom,$und,$can,$pre,$cos){
-			$sql = "insert into productos(nomproducto,unimed,stock, preuni,cosuni) values ('$nom','$und',$can,$pre,$cos)";
+		public function agrega_producto($nom,$und,$can,$pre,$cos,$prov){
+			$sql = "insert into productos(nomproducto,unimed,stock, preuni,cosuni,idProveedor) values ('$nom','$und',$can,$pre,$cos,$prov)";
 			
 			$res = mysqli_query($this->con, $sql);
 			if($res){
@@ -71,6 +72,13 @@ class Producto {
 				return false;
 			}
 		}
+
+		public function NombreProducto($id){
+			$sql = "SELECT nomproducto FROM productos WHERE idProducto=$id";
+			$res = mysqli_query($this->con, $sql);
+			$return = mysqli_fetch_array($res );
+			return $return ;
+		}
 		
 		public function set_idproducto($id){
 			$this->idproducto = $id;
@@ -89,6 +97,9 @@ class Producto {
 		}
 		public function set_cosuni($cos){
 			$this->cosuni = $cos;
+		}
+		public function set_prov($prov){
+			$this->prov = $prov;
 		}
 
 		public function get_idproducto(){
@@ -110,7 +121,9 @@ class Producto {
 			return $this->cosuni;
 		}
 
-
+		public function get_prov(){
+			return $this->prov;
+		}
 	
 	}
 	

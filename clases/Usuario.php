@@ -82,6 +82,12 @@
 			return $return ;
 		}
 
+		public function NombreUsuario($id){
+			$sql = "SELECT nombre FROM empleados WHERE idEmpleado=$id";
+			$res = mysqli_query($this->con, $sql);
+			$return = mysqli_fetch_array($res );
+			return $return ;
+		}
 
     }
 ?>

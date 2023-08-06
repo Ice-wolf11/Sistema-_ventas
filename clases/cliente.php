@@ -7,6 +7,7 @@ class  Cliente {
 		private $ruc;
 		private $dircliente;
 		private $telcliente;
+		private $con;
 		
 		public function conectar_db($cn){
 			$this->con = $cn;
@@ -68,6 +69,14 @@ class  Cliente {
 			}else{
 				return false;
 			}
+		}
+
+		public function NombreCliente($id){
+			//$sql = "SELECT nombre FROM clientes WHERE idCliente=$id";
+			$sql = "SELECT nombre FROM clientes where idCliente=$id";
+			$res = mysqli_query($this->con, $sql);
+			$return = mysqli_fetch_array($res );
+			return $return ;
 		}
 		
 		

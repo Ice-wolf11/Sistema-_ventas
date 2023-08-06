@@ -7,23 +7,23 @@ if (!isset($_SESSION['login_estado']) and $_SESSION['login_estado'] != 1){
 include(__DIR__.'/../../header.php'); 
 
 if (isset($_POST['envia_datos'])){
-    $nom =$_POST['nom'];
-    $tel =$_POST['tel'];
-    $user =$_POST['user'];
-    $pass =$_POST['pass'];
+    $fec =$_POST['fec'];
+    $cli =$_POST['cli'];
+    $user =$_SESSION['idEmpleado'];
+    $prod =$_POST['prod'];
     
     include_once(__DIR__.'/../../includes/acceso.php');
-    include_once(__DIR__.'/../../clases/Usuario.php');
+    include_once(__DIR__.'/../../clases/ventas.php');
     $conexion = connect_db();
-    $usuario = new Usuario();
-    $usuario->conectar_db($conexion);
+    $venta = new Ventas();
+    $venta->conectar_db($conexion);
     
-    $response = $usuario->agrega_usuario($nom,$tel,$user,$pass);
+    $response = $venta->agrega_venta($fec,$cli,$user,$prod);
 
     if($response) {
         $_SESSION['mensaje'] = 'Empleado agregado satisfactoriamente';
         $_SESSION['mensaje_tipo']='success';
-        header("location: lista_usuario.php");
+        header("location: lista_venta.php");
     } else
     echo "No se pudo agregar el cliente";
     

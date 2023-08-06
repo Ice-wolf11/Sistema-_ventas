@@ -11,7 +11,7 @@
   <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/Tareas/sisventas/index.php">Empresa SA</a>
+    <a class="navbar-brand" href="/sisventas/index.php">Empresa SA</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -25,14 +25,13 @@
           
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
          
-            <li><a class="dropdown-item" href="/Tareas/sisventas/Modules/Productos/lista_producto.php">Productos</a></li>
-            <li><a class="dropdown-item" href="/Tareas/sisventas/Modules/clientes/lista_cliente.php">Clientes</a></li>
-            <li><a class="dropdown-item" href="/Tareas/sisventas/Modules/Proveedor/lista_proveedor.php">Proveedor</a></li>
+            <li><a class="dropdown-item" href="/sisventas/Modules/Productos/lista_producto.php">Productos</a></li>
+            <li><a class="dropdown-item" href="/sisventas/Modules/clientes/lista_cliente.php">Clientes</a></li>
+            <li><a class="dropdown-item" href="/sisventas/Modules/Proveedor/lista_proveedor.php">Proveedor</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="/Tareas/sisventas/Modules/Documentos/lista_docu.php">Documentos</a></li>
-            <li><a class="dropdown-item" href="/Tareas/sisventas/Modules/Usuarios/lista_usuario.php">Usuarios</a></li>
+            <li><a class="dropdown-item" href="/sisventas/Modules/Documentos/lista_docu.php">Documentos</a></li>
+            <li><a class="dropdown-item" href="/sisventas/Modules/Usuarios/lista_usuario.php">Usuarios</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="/Tareas/sisventas/logout.php">Salir</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
@@ -40,14 +39,26 @@
             Procesos
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="/Tareas/sisventas/Modules/Ventas/registro_ventas.php">Registro Ventas</a></li>
+            <li><a class="dropdown-item" href="/sisventas/Modules/Ventas/agrega_ven.php">Registro Ventas</a></li>
             </ul>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Consultas</a>
+        <li class="nav-item dropdown">
+          <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Consultas</a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="/sisventas/Modules/Productos/ConsultaStock.php">Stock De Productos</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="/sisventas/Modules/Ventas/lista_venta.php">ver ventas</a></li>
+            </ul>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Herramientas</a>
+        <li class="nav-item dropdown">
+          <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Configuracion
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="/sisventas/logout.php">Salir</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="/sisventas/Modules/Usuarios/contraseña.php">cambiar contraseña</a></li>
+            </ul>
         </li>
       </ul>
       

@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['login_estado']) and $_SESSION['login_estado'] != 1){
-    header("location: /Tareas/sisventas/login.php");
+    header("location: /sisventas/login.php");
     exit;
 }
 include(__DIR__.'/../../header.php'); 
@@ -12,6 +12,7 @@ if (isset($_POST['envia_datos'])){
     $can = $_POST['can'];
     $pre = $_POST['pre'];
     $cos = $_POST['cos'];
+    $prov = $_POST['prov'];
     
     include_once(__DIR__.'/../../includes/acceso.php');
     include_once(__DIR__.'/../../clases/producto.php');
@@ -19,7 +20,7 @@ if (isset($_POST['envia_datos'])){
     $oproducto = new Producto();
     $oproducto->conectar_db($conexion);
     
-    $response = $oproducto->agrega_producto($nom,$und,$can,$pre,$cos);
+    $response = $oproducto->agrega_producto($nom,$und,$can,$pre,$cos,$prov);
 
     if($response) {
         header("location: lista_producto.php");

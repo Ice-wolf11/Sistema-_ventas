@@ -1,9 +1,12 @@
 <?php
 
-class Documento {
+class Ventas {
         
-		private $idDocumento;
-		private $nombre;
+		private $idVenta;
+		private $fecha;
+        private $idCliente;
+        private $idEmpleado;
+        private $idProducto;
 		
 		public function conectar_db($cn){
 			$this->con = $cn;
@@ -15,22 +18,22 @@ class Documento {
 			return $valor;
 		}
 		
-		public function listadocu(){
-			$sql = "SELECT * FROM documentos";
+		public function listaventa(){
+			$sql = "SELECT * FROM ventas";
 			$res = mysqli_query($this->con, $sql);
 			return $res;
 		}
 
         public function consulta($id){
-			$sql = "SELECT * FROM documentos where idDocumento=$id";
+			$sql = "SELECT * FROM ventas where idVenta=$id";
 			$res = mysqli_query($this->con, $sql);
 			$return = mysqli_fetch_array($res );
 			return $return ;
 		}
 		
-		public function agrega_documento($id,$nomdocu,$numdocu){
-			$sql = "insert into documentos(idDocumento,nombre,NroDocumento) 
-            values ($id,'$nomdocu','$numdocu')";
+		public function agrega_venta($fecha,$clie,$emp,$prod){
+			$sql = "insert into ventas(fecha,idCliente,idEmpleado,idProducto) 
+            values ('$fecha','$clie','$emp','$prod')";
 			
 			$res = mysqli_query($this->con, $sql);
 			if($res){
@@ -40,18 +43,13 @@ class Documento {
 			}
 
 		}	
-		
+		/*
         public function numero_actual($id){
             $sql = "SELECT NroDocumento FROM documentos where idDocumento=$id";
 			$res = mysqli_query($this->con, $sql);
 			$return = mysqli_fetch_array($res );
 			return $return ;
-        }
-
-
-	
-	}
-	
-	
+        }*/
+	}		
 
 ?>	
